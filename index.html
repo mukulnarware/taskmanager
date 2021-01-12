@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task manager</title>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div>
+        <label for="inputtask">Add task:</label>
+    <input id="inputtask">
+    <button id="btn"> Add Task</button>
+    </div><br><br>
+
+
+    <section id="todo"><h3>To Do-</h3>
+
+        <Ul id="todo-list">
+            
+        </Ul>
+
+    </section><br>
+
+    <section id="finished"><h3>Completed task-</h3>
+
+        <Ul class="finished-list">
+            
+        </Ul>
+
+
+    </section>
+<script>
+
+// let newtask=document.getElementById("inputtask").value;
+
+////add to do function
+
+function addToDo(){
+    
+    
+    let newtask=document.getElementById("inputtask").value;
+    document.getElementById("inputtask").value="";
+    console.log(newtask);
+  if(newtask!=""){
+    let task=document.createElement("li");
+    task.setAttribute("class","li-item");
+    task.innerHTML=`<input type='checkbox' class='checkbox'  > <span class="listitem">`+newtask +`</span><input type='text' class='editbox'id='editbox' value=${newtask}><button class='editbutton' id='editbutton' >Edit</button> <button class='deletebutton' id='deletebutton' >Delete</button>`;
+     
+    let list=document.getElementById("todo-list");
+    list.appendChild(task);
+    
+    newtask="";
+
+
+
+    $(document).ready(function() {
+  $('input[type=checkbox]').change(function() {
+
+ console.log($(this).parent(".li-item"))
+    $(".finished-list").append($(this).parent(".li-item"));
+       
+  });
+
+// edittask
+$(".editbutton").click(function(){
+
+
+    let edittask=document.getElementById("editbox").value;
+    console.log(edittask)
+// document.getElementById("listitem").value=edittask;
+$(this).prev().prev().text(edittask);
+
+
+})
+
+// for Deletion
+$(".deletebutton").click(function(){
+
+
+    $(this).parent(".li-item").remove();
+})
+
+});
+
+
+  }
+
+}
+////////////////edit button
+
+
+
+
+
+ 
+
+// Add task button
+let button=document.getElementById("btn");
+button.addEventListener("click",addToDo);
+
+///?
+</script>
+
+</body>
+</html>
